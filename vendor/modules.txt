@@ -1,0 +1,5 @@
+# golang.org/x/text v0.3.2
+golang.org/x/text/unicode/norm
+golang.org/x/text/transform
+# gopkg.in/yaml.v1 v1.0.0-20140924161607-9f9df34309c0
+gopkg.in/yaml.v1
