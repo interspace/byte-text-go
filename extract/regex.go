@@ -207,7 +207,7 @@ var (
 
 	// Mentions
 	atSigns      = regexp.MustCompile(`[` + atSignChars + `]`)
-	validMention = regexp.MustCompile(`(?i)([^a-zA-Z0-9_!#$%&*` + atSignChars + `]|^|^\s*RT:?)([` + atSignChars + `]+)([a-z0-9_]+[_.~]?[a-z0-9_]+)?`)
+	validMention = regexp.MustCompile(`(?i)([^a-zA-Z0-9_!#$%&*` + atSignChars + `]|^|^\s*RT:?)([` + atSignChars + `]+)([a-z0-9]+[_.~]?[a-z0-9]+)?`)
 
 	invalidMentionMatchEnd = regexp.MustCompile(`\A(?:[` + atSignChars + latinAccentChars + `]|://)`)
 

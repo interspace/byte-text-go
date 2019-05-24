@@ -66,17 +66,41 @@ tests:
       text: "@example~name"
       expected: true
 
-    - description: "Usernames should not start with the allowed special characters"
+    - description: "Usernames should not start with the . character"
       text: "@.example"
       expected: false
 
-    - description: "Usernames should not end with the allowed special characters"
+    - description: "Usernames should not end with the . character"
       text: "@example."
+      expected: false
+    
+    - description: "Usernames should not start with the ~ character"
+      text: "@~example"
+      expected: false
+
+    - description: "Usernames should not end with the ~ character"
+      text: "@example~"
+      expected: false
+
+    - description: "Usernames should not start with the _ character"
+      text: "@_example"
+      expected: false
+
+    - description: "Usernames should not end with the _ character"
+      text: "@example_"
+      expected: false
+
+    - description: "Usernames should not allow multiple divider characters"
+      text: "@example_a_b"
       expected: false
 
     - description: "Usernames SHOULD NOT allow the - character"
       text: "@example-name"
       expected: false
+
+    - description: "Username validation should ignore case"
+      text: "@EXAMPLE"
+      expected: true
 
   hashtags:
     - description: "Valid hashtag: a-z < 20 characters"
