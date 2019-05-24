@@ -1,5 +1,3 @@
-github.com/interspace/twitter-text-go v0.0.0-20190524184441-2eb6d21a9ebc h1:wILSJILZ5v4qooEk2lHA3BZy63Stz99WHoWlIN0q/5A=
-github.com/interspace/twitter-text-go v0.0.0-20190524184441-2eb6d21a9ebc/go.mod h1:WAkB/XAPUt3jPR5ABYpr67Ybnwa78l07nAAFfs6J0/o=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
