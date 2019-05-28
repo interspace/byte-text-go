@@ -105,7 +105,7 @@ func HashtagIsValid(hashtag string) bool {
 		return false
 	}
 
-	extracted := extract.HashTags(hashtag)
+	extracted := extract.Hashtags(hashtag)
 	return len(extracted) == 1 && extracted[0].Text == hashtag
 }
 

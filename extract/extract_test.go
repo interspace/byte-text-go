@@ -31,7 +31,7 @@ func ExampleEntities() {
 	// Output:
 	// Entity:@username Type:Mention
 	// Entity:http://t.co/abcde Type:URL
-	// Entity:#hashtag Type:HashTag
+	// Entity:#hashtag Type:Hashtag
 }
 
 func ExampleMentionedScreenNames() {

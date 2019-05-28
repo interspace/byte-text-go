@@ -8,7 +8,7 @@ import (
 	goyaml "gopkg.in/yaml.v1"
 )
 
-func TestHashTags(t *testing.T) {
+func TestHashtags(t *testing.T) {
 	contents, err := ioutil.ReadFile(extractYmlPath)
 	if err != nil {
 		t.Errorf("Error reading extract.yml: %v", err)
@@ -29,7 +29,7 @@ func TestHashTags(t *testing.T) {
 	}
 
 	for _, test := range hashtagTests {
-		result := HashTags(test.Text)
+		result := Hashtags(test.Text)
 
 		expected, ok := test.Expected.([]interface{})
 		if !ok {
@@ -62,9 +62,9 @@ func TestHashTags(t *testing.T) {
 				)
 			}
 
-			if actual.Type != HashTag {
+			if actual.Type != Hashtag {
 				t.Errorf(
-					"ExtractHashtags returned entity with wrong type. Expected:HashTag Got:%v",
+					"ExtractHashtags returned entity with wrong type. Expected:Hashtag Got:%v",
 					actual.Type,
 				)
 			}
@@ -72,7 +72,7 @@ func TestHashTags(t *testing.T) {
 	}
 }
 
-func TestHashTagsWithIndices(t *testing.T) {
+func TestHashtagsWithIndices(t *testing.T) {
 	contents, err := ioutil.ReadFile(extractYmlPath)
 	if err != nil {
 		t.Errorf("Error reading extract.yml: %v", err)
@@ -93,7 +93,7 @@ func TestHashTagsWithIndices(t *testing.T) {
 	}
 
 	for _, test := range hashtagTests {
-		result := HashTags(test.Text)
+		result := Hashtags(test.Text)
 
 		expected, ok := test.Expected.([]interface{})
 		if !ok {

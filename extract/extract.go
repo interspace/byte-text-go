@@ -33,7 +33,7 @@ type EntityType int
 // EntityTypes
 const (
 	Mention EntityType = iota
-	HashTag
+	Hashtag
 	URL
 )
 
@@ -42,8 +42,8 @@ func (t EntityType) String() string {
 	switch t {
 	case Mention:
 		return "Mention"
-	case HashTag:
-		return "HashTag"
+	case Hashtag:
+		return "Hashtag"
 	case URL:
 		return "URL"
 	}
@@ -58,7 +58,7 @@ type ByteEntity struct {
 	Type      EntityType
 
 	screenName string // Contains the value of username without the leading '@' when Type=Mention
-	hashtag    string // Contains the value of the hashtag without the leading # when Type=HashTag
+	hashtag    string // Contains the value of the hashtag without the leading # when Type=Hashtag
 
 	screenNameIsSet bool
 	hashtagIsSet    bool
@@ -124,10 +124,10 @@ func (t *ByteEntity) ScreenName() (string, bool) {
 	return t.screenName, t.screenNameIsSet
 }
 
-// HashTag Returns the value of the extracted hashtag (when Type=HashTag) and
+// Hashtag Returns the value of the extracted hashtag (when Type=Hashtag) and
 // a boolean indicating whether the value is set. The return value will be
-// ("", false) when Type != HashTag
-func (t *ByteEntity) HashTag() (string, bool) {
+// ("", false) when Type != Hashtag
+func (t *ByteEntity) Hashtag() (string, bool) {
 	return t.hashtag, t.hashtagIsSet
 }
 
@@ -136,7 +136,7 @@ func (t *ByteEntity) HashTag() (string, bool) {
 func Entities(text string) []*ByteEntity {
 	var result entitiesT
 	result = URLs(text)
-	result = append(result, HashTags(text)...)
+	result = append(result, Hashtags(text)...)
 	result = append(result, Mentions(text)...)
 
 	sort.Sort(result)
@@ -324,15 +324,15 @@ func Mentions(text string) []*ByteEntity {
 	return result
 }
 
-// HashTags extracts #hashtag occurrences from the supplied text. Returns a
+// Hashtags extracts #hashtag occurrences from the supplied text. Returns a
 // slice of ByteEntity struct pointers.
-// The HashTag field of the returned entities will contain the value of the
+// The Hashtag field of the returned entities will contain the value of the
 // extracted hashtag without the leading # character
-func HashTags(text string) []*ByteEntity {
-	return extractHashTags(text, true)
+func Hashtags(text string) []*ByteEntity {
+	return extractHashtags(text, true)
 }
 
-func extractHashTags(text string, checkURLOverlap bool) []*ByteEntity {
+func extractHashtags(text string, checkURLOverlap bool) []*ByteEntity {
 	// Optimization
 	if !strings.ContainsAny(text, "#＃") {
 		return nil
@@ -356,7 +356,7 @@ func extractHashTags(text string, checkURLOverlap bool) []*ByteEntity {
 				Start: hashStart,
 				Stop:  hashtagEnd,
 			},
-			Type: HashTag,
+			Type: Hashtag,
 		})
 	}
 
@@ -370,7 +370,7 @@ func extractHashTags(text string, checkURLOverlap bool) []*ByteEntity {
 
 		numHashtags := 0
 		for _, e := range result {
-			if e.Type == HashTag {
+			if e.Type == Hashtag {
 				result[numHashtags] = e
 				numHashtags++
 			}
@@ -379,7 +379,7 @@ func extractHashTags(text string, checkURLOverlap bool) []*ByteEntity {
 
 		var tmpResult []*ByteEntity
 		for _, e := range result {
-			if e.Type == HashTag {
+			if e.Type == Hashtag {
 				tmpResult = append(tmpResult, e)
 			}
 		}
