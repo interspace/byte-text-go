@@ -69,8 +69,8 @@ func TextLength(text string) int {
 }
 
 type ValidationArgs struct {
-	maxLength  int
-	canBeEmpty bool
+	MaxLength  int
+	CanBeEmpty bool
 }
 
 // TextIsValid checks whether a string is a valid text and returns true or false
@@ -85,10 +85,10 @@ func TextIsValid(text string, args ValidationArgs) bool {
 // - The text is empty
 // - The text contains invalid characters
 func TextValidate(text string, args ValidationArgs) error {
-	if !args.canBeEmpty && text == "" {
+	if !args.CanBeEmpty && text == "" {
 		return EmptyError{}
-	} else if length := TextLength(text); length > args.maxLength {
-		return TooLongError{length: length, maxLength: args.maxLength}
+	} else if length := TextLength(text); length > args.MaxLength {
+		return TooLongError{length: length, maxLength: args.MaxLength}
 	} else if i := strings.IndexAny(text, invalidChars); i > -1 {
 		r, _ := utf8.DecodeRuneInString(text[i:])
 		return InvalidCharacterError{Offset: i, Character: r}
