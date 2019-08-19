@@ -38,7 +38,7 @@ func TestTextIsValid(t *testing.T) {
 		description, _ := test["description"]
 		expected, _ := test["expected"]
 
-		actual := TextIsValid(text.(string))
+		actual := TextIsValid(text.(string), ValidationArgs{canBeEmpty: false, maxLength: 140})
 		if actual != expected {
 			t.Errorf(
 				"TextIsValid returned incorrect value for test [%s]. Expected:%v Got:%v",

@@ -11,7 +11,6 @@ import (
 )
 
 const (
-	maxLength    = 140
 	invalidChars = "\uFFFE\uFEFF\uFFFF\u202A\u202B\u202C\u202D\u202E"
 )
 
@@ -19,10 +18,13 @@ var formC = norm.NFC
 
 // TooLongError is returned when text is too long to be valid.
 // The value of the error is the actual length of the input string
-type TooLongError int
+type TooLongError struct {
+	length    int
+	maxLength int
+}
 
 func (e TooLongError) Error() string {
-	return fmt.Sprintf("Length %d exceeds %d characters", int(e), maxLength)
+	return fmt.Sprintf("Length %d exceeds %d characters", e.length, e.maxLength)
 }
 
 // EmptyError is returned when text is empty
@@ -66,9 +68,14 @@ func TextLength(text string) int {
 	return length
 }
 
+type ValidationArgs struct {
+	maxLength  int
+	canBeEmpty bool
+}
+
 // TextIsValid checks whether a string is a valid text and returns true or false
-func TextIsValid(text string) bool {
-	err := TextValidate(text)
+func TextIsValid(text string, args ValidationArgs) bool {
+	err := TextValidate(text, args)
 	return err == nil
 }
 
@@ -77,11 +84,11 @@ func TextIsValid(text string) bool {
 // - The text is too long
 // - The text is empty
 // - The text contains invalid characters
-func TextValidate(text string) error {
-	if text == "" {
+func TextValidate(text string, args ValidationArgs) error {
+	if !args.canBeEmpty && text == "" {
 		return EmptyError{}
-	} else if length := TextLength(text); length > maxLength {
-		return TooLongError(length)
+	} else if length := TextLength(text); length > args.maxLength {
+		return TooLongError{length: length, maxLength: args.maxLength}
 	} else if i := strings.IndexAny(text, invalidChars); i > -1 {
 		r, _ := utf8.DecodeRuneInString(text[i:])
 		return InvalidCharacterError{Offset: i, Character: r}
